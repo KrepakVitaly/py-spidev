@@ -2,7 +2,7 @@
 
 import spidev
 import time
-
+import os
 
 class Base:
     # Foreground:
@@ -44,8 +44,10 @@ def write_pot(input):
     lsb = input & 0xFF
     tx_array[0] = msb
     tx_array[1] = lsb
-    rx_array = spi.xfer(tx_array)
-    print(Base.BOLD, "RX:" + Base.OKGREEN, Base.END, tx_array[0:8], ''.join(str(chr(e)) for e in tx_array[POS_ENERG_S:POS_ENERG_S+16]), ''.join(str(chr(e)) for e in tx_array[POS_ENERG_V:POS_ENERG_V+64]))
+    tmp = tx_array.copy()
+    rx_array = spi.xfer(tmp)
+    os.system('clear')
+    print(Base.BOLD, "RX:" + Base.OKGREEN, Base.END, rx_array[0:8], ''.join(str(chr(e)) for e in rx_array[POS_ENERG_S:POS_ENERG_S+16]), ''.join(str(chr(e)) for e in rx_array[POS_ENERG_V:POS_ENERG_V+64]))
     #print(Base.BOLD, "RX:" + Base.OKGREEN, Base.END, tx_array[0:8], tx_array[POS_ENERG_S:POS_ENERG_S+8],  tx_array[POS_ENERG_V:POS_ENERG_V+64])
 
     #print(Base.BOLD, "TX:" + Base.OKGREEN, Base.END, tx_array[0:8], tx_array[POS_EXT_RELAY:POS_EXT_RELAY+8], ''.join(str(chr(e)) for e in tx_array[POS_ENERG_V-64:POS_ENERG_V+64]))
