@@ -87,7 +87,17 @@ def write_pot(input):
     print("Phase 2 CURRE = %4.4f" % (struct.unpack_from('f', bytes(rx_array[POS_ENERG_V+4:POS_ENERG_V+8]))[0]))
     print("Phase 3 CURRE = %4.4f" % (struct.unpack_from('f', bytes(rx_array[POS_ENERG_V+8:POS_ENERG_V+12]))[0]))
 
-    print(Base.BOLD, "RX:" + Base.OKGREEN, Base.END, rx_array[0:8], ''.join(str(chr(e)) for e in rx_array[POS_ENERG_S:POS_ENERG_S+16]), ''.join(str(chr(e)) for e in rx_array[POS_ENERG_V+12:POS_ENERG_V+64]))
+    print("Phase 1 VOLTA = %4.4f" % (struct.unpack_from('f', bytes(rx_array[POS_ENERG_V+0+12:POS_ENERG_V+4+12]))[0]))
+    print("Phase 2 VOLTA = %4.4f" % (struct.unpack_from('f', bytes(rx_array[POS_ENERG_V+4+12:POS_ENERG_V+8+12]))[0]))
+    print("Phase 3 VOLTA = %4.4f" % (struct.unpack_from('f', bytes(rx_array[POS_ENERG_V+8+12:POS_ENERG_V+12+12]))[0]))
+
+    print("Phase 1 POWER = %4.4f" % (struct.unpack_from('f', bytes(rx_array[POS_ENERG_V+0+24:POS_ENERG_V+4+24]))[0]))
+    print("Phase 2 POWER = %4.4f" % (struct.unpack_from('f', bytes(rx_array[POS_ENERG_V+4+24:POS_ENERG_V+8+24]))[0]))
+    print("Phase 3 POWER = %4.4f" % (struct.unpack_from('f', bytes(rx_array[POS_ENERG_V+8+24:POS_ENERG_V+12+24]))[0]))
+
+
+
+    print(Base.BOLD, "RX:" + Base.OKGREEN, Base.END, rx_array[0:8], ''.join(str(chr(e)) for e in rx_array[POS_ENERG_S:POS_ENERG_S+16])) #, ''.join(str(chr(e)) for e in rx_array[POS_ENERG_V+12:POS_ENERG_V+64]))
     #print(Base.BOLD, "RX:" + Base.OKGREEN, Base.END, rx_array[0:8], rx_array[POS_ENERG_S:POS_ENERG_S+8],  rx_array[POS_ENERG_V:POS_ENERG_V+64])
 
     #print(Base.BOLD, "TX:" + Base.OKGREEN, Base.END, tx_array[0:8], tx_array[POS_EXT_RELAY:POS_EXT_RELAY+8], ''.join(str(chr(e)) for e in tx_array[POS_ENERG_V-64:POS_ENERG_V+64]))
@@ -105,7 +115,7 @@ if __name__ == '__main__':
    data = 0x555
 
    while True:
-     time.sleep(0.1)
+     time.sleep(0.02)
      data = data + 1
      write_pot(data)
      for x in range(8):
