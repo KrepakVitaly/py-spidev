@@ -27,14 +27,14 @@ POS_ENERG_S = 320
 POS_ENERG_V = 384
 
 
-tx_array[POS_EXT_RELAY + 0] = 1
-tx_array[POS_EXT_RELAY + 1] = 0
-tx_array[POS_EXT_RELAY + 2] = 1
-tx_array[POS_EXT_RELAY + 3] = 0
-tx_array[POS_EXT_RELAY + 4] = 1
-tx_array[POS_EXT_RELAY + 5] = 0
-tx_array[POS_EXT_RELAY + 6] = 1
-tx_array[POS_EXT_RELAY + 7] = 0
+#tx_array[POS_EXT_RELAY + 0] = 1
+#tx_array[POS_EXT_RELAY + 1] = 0
+#tx_array[POS_EXT_RELAY + 2] = 1
+#tx_array[POS_EXT_RELAY + 3] = 0
+#tx_array[POS_EXT_RELAY + 4] = 1
+#tx_array[POS_EXT_RELAY + 5] = 0
+#tx_array[POS_EXT_RELAY + 6] = 1
+#tx_array[POS_EXT_RELAY + 7] = 0
 
 
 # Split an integer input into a two byte array to send via SPI
@@ -84,7 +84,7 @@ if __name__ == '__main__':
    data = 0x555
 
    while True:
-     time.sleep(0.02)
+     time.sleep(2)
      data = data + 1
      write_pot(data)
      for x in range(8):
